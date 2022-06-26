@@ -1,22 +1,8 @@
 *{
+    padding: 0;
     margin: 0;
-    padding: 3px;
-    --back-color:#74db58;
+    outline: 2px solid red;
 }
-img{
-    width: 80px;
-}
-.header{
-    background-color: var(--back-color);
-}
-
-.header nav ul li{
-    list-style: none;
-    display: inline;
-}
-.Log-Button{
-    padding: 5px;
-    background-color: inherit;
-    border-style: none;
-    font-size: 20px;
+.input>input[type='button']{
+    border:3px dashed green;
 }

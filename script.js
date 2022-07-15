@@ -1,30 +1,25 @@
-let tasks=[] // a container for having all the tasks here
+const table = document.getElementById("task-table");
+const add_button = document.getElementById("add-task");
+const remove_button = document.getElementById("remove-task");
 
-// function load_tasks() // to be defined to support loading saved tasks
+function add_task(){
+    // window.alert("Button Pressed");
+    let task_row = document.createElement("tr");
+    let task_id = document.createElement("td");
+    let task_name = document.createElement("td");
+    let task_description = document.createElement("td");
+    let task_due = document.createElement("td");
 
-function add_task(){// to add a task to the table and also store in the memory
-    console.log('added task')
-    let taskName=document.createElement('td')
-    let taskDesc=document.createElement('td')
-    let taskRow=document.createElement('tr')
-    taskName.innerText=textBoxes[0].value
-    taskDesc.innerText=textBoxes[1].value
-    taskRow.appendChild(taskName)
-    taskRow.appendChild(taskDesc)
-    document.querySelector('table').appendChild(taskRow)
+    task_id.textContent="id";
+    task_name.textContent="name";
+    task_description.textContent="description";
+    task_due.textContent="due";
+
+    task_row.append(task_id);
+    task_row.append(task_name);
+    task_row.append(task_description);
+    task_row.append(task_due);
+    table.append(task_row);
 }
 
-var textBoxes=document.querySelectorAll(".input>input[type='text']")
-for (let i=0;i<2;i++){
-    // console.log("tried it.")
-    textBoxes[i].addEventListener("focus",(event) => {
-        event.target.value='';
-    })
-}
-textBoxes[0].addEventListener("blur",(event)=>{
-    event.target.value="Enter Task Name";
-})
-textBoxes[1].addEventListener("blur",(event)=>{
-    event.target.value="Enter Task Description";
-})
-document.querySelector(".input>input[type='button']").addEventListener('click',add_task)
+add_button.addEventListener("click",add_task);

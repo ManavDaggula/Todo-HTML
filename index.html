@@ -4,28 +4,23 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css">
-    <link rel="shortcut icon" href="ToDo-List.ico" type="image/x-icon">
-    <script src="script.js" defer></script>
-    <title>To-Do</title>
+    <title>To-Do List</title>
+    <!-- <link rel="stylesheet" href="/../bootstrap-5.2.0-beta1-dist/css/bootstrap.min.css"> -->
+    <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
-    <header>
-        <img src="/user.png" alt="user-image">
-    </header>
-    <main>
-        <p>Tasks:</p>
-        <table>
-            <tr>
-                <th>Task Name</th>
-                <th>Description</th>
-            </tr>
-        </table>
-        <div class="input">
-            <input type="text" value="Enter Task Name" id="taskName">
-            <input type="text" value="Enter Task Description" id="taskDescription">
-            <input type="button" value="Add Task">
-        </div>
-    </main>
+    <header class="container-lg justify-content-center">To-Do List</header>
+    <table>
+        <thead>
+            <th>ID</th><th>Task Name</th><th>Task Description</th><th>Due</th>
+        </thead>
+        <tbody id="task-table"></tbody>
+        
+    </table>
+    <div class="button-holder">
+        <button id="add-task">Add Task</button>
+        <button id="remove-task">Remove Task</button>
+    </div>
+    <script src="/script.js"></script>
 </body>
 </html>

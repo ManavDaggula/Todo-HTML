@@ -1,8 +1,50 @@
 *{
-    padding: 0;
-    margin: 0;
-    outline: 2px solid red;
+    box-sizing: border-box;
 }
-.input>input[type='button']{
-    border:3px dashed green;
+
+body{
+    margin:0px;
+}
+
+header{
+    width:100%;
+    background:#12ED69;
+    text-align: center;
+    font-size:2rem;
+    padding:2%;
+}
+table{
+    width:90%;
+    margin:auto;
+    margin-top: 2%;
+    margin-bottom: 2%;
+    padding: 0px;
+    border-spacing:0px;
+    border-collapse: collapse;
+    border-radius: 0.7rem;
+    overflow: hidden;
+}
+
+table th{
+    background-color: #0082E6;
+}
+table td,table th{
+    text-align: center;
+}
+table{
+    background-color: #50D886;
+}
+button{
+    background: #0082E6;
+    border-radius:30px;
+    width:20%;
+    height:30px;
+    font-size:1rem;
+}
+.button-holder{
+    display:flex;
+    width:100%;
+    margin:auto;
+    justify-content: center;
+    gap:10%;
 }

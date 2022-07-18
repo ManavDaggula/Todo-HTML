@@ -72,11 +72,30 @@ function get_new_task(){
 
 function remove_a_task(){
     let tasks = table.children;
-    for(let i=0;i<tasks.length;i++){
-        tasks[i].addEventListener("click",function (event){event.target.parent.remove();})
+    if(tasks.length!==0){
+        console.log("trying to remove a task");
+        for(let i=0;i<tasks.length;i++){
+            tasks[i].addEventListener("click",remove_row);
+        }
+        let message = document.createElement("p");
+        message.innerText = "Select the task which is completed.";
+        input_fields.append(message);
+        button_div.style.display="none";
     }
 }
 
 function remove_row(event){
-    
+    // console.log(event.target.parentElement);
+    event.target.parentElement.remove()
+    let tasks = table.children;
+    for(let i=0;i<tasks.length;i++){
+        // console.log(tasks[i]);
+        tasks[i].querySelector('td').innerText = i+1;
+        tasks[i].removeEventListener("click",remove_row);
+    }
+    let input_arr = input_fields.children;
+    while(input_arr.length!==0){
+        input_arr[0].remove()
+    }
+    button_div.style.display="flex";
 }

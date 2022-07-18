@@ -48,3 +48,11 @@ button{
     justify-content: center;
     gap:10%;
 }
+#inputs{
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    place-items: center;
+}
+#inputs button{
+    grid-column: 1 / 3;
+}

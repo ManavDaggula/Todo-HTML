@@ -101,6 +101,7 @@ function remove_row(event){
         input_arr[0].remove()
     }
     button_div.style.display="flex";
+    save_tasks();
 }
 
 function save_tasks(){

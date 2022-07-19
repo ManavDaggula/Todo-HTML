@@ -4,6 +4,8 @@ const remove_button = document.getElementById("remove-task");
 const button_div = document.querySelector(".button-holder");
 const input_fields = document.querySelector("#inputs");
 
+load_from_save();
+
 add_button.addEventListener("click",get_new_task);
 remove_button.addEventListener("click",remove_a_task);
 
@@ -41,6 +43,7 @@ function add_task(){
     while(input_arr.length!==0){
         input_arr[0].remove()
     }
+    save_tasks();
 }
 function get_new_task(){
     // window.alert("get-task-called");
@@ -98,4 +101,26 @@ function remove_row(event){
         input_arr[0].remove()
     }
     button_div.style.display="flex";
+}
+
+function save_tasks(){
+    // let tasks = [];
+    // console.log(table.children)
+    // for(let i=0;i<table.children.length;i++){
+    //     tasks[i]=table.children[i];
+    // }
+    // console.log(tasks)
+    // window.localStorage.setItem('saved_items',tasks);
+    window.localStorage.setItem('saved_items',table.innerHTML);
+}
+
+function load_from_save(){
+    // let tasks = window.localStorage.getItem('saved_tasks');
+    // if(tasks===null){return;}
+    // else{console.log('tasks is not null');}
+    // for(let i=0;i<tasks.length;i++){
+    //     table.append(tasks[i]);
+    // }
+    // console.log(tasks);
+    table.innerHTML = window.localStorage.getItem('saved_items');
 }

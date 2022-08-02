@@ -23,6 +23,12 @@ function add_task(){
     task_name.textContent=input_arr[1].value.trim();
     task_description.textContent=input_arr[3].value.trim();
     task_due.textContent=input_arr[5].value;
+    
+    //test for time formating
+    let due = new Date(task_due.textContent) - new Date().getTime();
+    if (due <= 86400000){
+        task_row.style.backgroundColor = "red";
+    }
 
     //validation
     // let valid = false;

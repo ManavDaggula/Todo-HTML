@@ -4,6 +4,8 @@
 
 body{
     margin:0px;
+    /* width:500px;
+    height:300px; */
 }
 
 header{
@@ -37,8 +39,8 @@ table{
 button{
     background: #0082E6;
     border-radius:30px;
-    width:20%;
-    height:30px;
+    /* width:20%; */
+    /* height:30px; */
     font-size:1rem;
 }
 .button-holder{

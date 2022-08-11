@@ -16,25 +16,44 @@ function add_task(){
     let task_name = document.createElement("td");
     let task_description = document.createElement("td");
     let task_due = document.createElement("td");
+    let valid=true;
 
     let input_arr = input_fields.children;
 
     task_id.textContent=table.children.length + 1;
     task_name.textContent=input_arr[1].value.trim();
     task_description.textContent=input_arr[3].value.trim();
-    task_due.textContent=input_arr[5].value;
+    task_due.textContent=input_arr[5].children[0].value +" "+ input_arr[5].children[1].value
+    
     
     //test for time formating
-    let due = new Date(task_due.textContent) - new Date().getTime();
+    // console.log(new Date(input_arr[5].children[0].value +"T"+ input_arr[5].children[1].value))
+    
+    let task_date = input_arr[5].children[0].value;
+    if(task_date===""){
+        valid=false;
+        console.log("date is empty")
+    }
+    
+    
+    let task_time = input_arr[5].children[1].value;
+    if(task_time===""){
+        valid=false;
+        console.log("time is empty")
+    }
+
+    let due = new Date(input_arr[5].children[0].value +"T"+ input_arr[5].children[1].value) - new Date().getTime();
     if (due <= 86400000){
-        task_row.style.backgroundColor = "red";
+        task_row.style.backgroundColor = "#d4401b";
     }
 
     //validation
     // let valid = false;
     // console.log(task_name);
     // console.log(task_name!=="");
-    if(task_name.textContent!==""){
+    if(task_name.textContent===""){valid=false;}
+    console.log(valid)
+    if(valid==true){
         
         task_row.append(task_id);
         task_row.append(task_name);
@@ -64,7 +83,12 @@ function get_new_task(){
     let input2 = document.createElement("input");
     input2.type="text";
     let input3 = document.createElement("input");
-    input3.type="datetime-local";
+    input3.type="date";
+    let input4 = document.createElement("input");
+    input4.type="time";
+    let due_input = document.createElement("div")
+    due_input.append(input3);
+    due_input.append(input4)
     let add = document.createElement("button");
     add.innerText="Add";
     // add.style.gridColumn="1 / span 2";
@@ -74,7 +98,7 @@ function get_new_task(){
     input_fields.append(label2);
     input_fields.append(input2);
     input_fields.append(label3);
-    input_fields.append(input3);
+    input_fields.append(due_input);
     input_fields.append(add);
     button_div.style.display="none";
 }
@@ -111,14 +135,17 @@ function remove_row(event){
 }
 
 function save_tasks(){
-    // let tasks = [];
-    // console.log(table.children)
-    // for(let i=0;i<table.children.length;i++){
-    //     tasks[i]=table.children[i];
-    // }
-    // console.log(tasks)
-    // window.localStorage.setItem('saved_items',tasks);
-    window.localStorage.setItem('saved_items',table.innerHTML);
+    let tasks = [];
+    if(table.children.length==0){return;}
+    for (let i=0;i<table.children.length;i++){
+        let task_obj = {"name":table.children[1].textContent,"description":table.children[2].textContent,"due":table.children[3].textContent}
+        tasks.append(task_obj)
+    }
+    // new Array(table.children).forEach((row) => {
+    //     let row_contents = row.children;
+    //     console.log(row_contents)
+    // });
+    window.localStorage.setItem('saved_items',{tasks});
 }
 
 function load_from_save(){

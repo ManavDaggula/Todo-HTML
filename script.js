@@ -11,55 +11,31 @@ remove_button.addEventListener("click",remove_a_task);
 
 function add_task(){
     // window.alert("Button Pressed");
-    let task_row = document.createElement("tr");
-    let task_id = document.createElement("td");
-    let task_name = document.createElement("td");
-    let task_description = document.createElement("td");
-    let task_due = document.createElement("td");
+    
     let valid=true;
-
     let input_arr = input_fields.children;
 
-    task_id.textContent=table.children.length + 1;
-    task_name.textContent=input_arr[1].value.trim();
-    task_description.textContent=input_arr[3].value.trim();
-    task_due.textContent=input_arr[5].children[0].value +" "+ input_arr[5].children[1].value
-    
-    
-    //test for time formating
-    // console.log(new Date(input_arr[5].children[0].value +"T"+ input_arr[5].children[1].value))
+    let task_name = input_arr[1].value.trim();
     
     let task_date = input_arr[5].children[0].value;
     if(task_date===""){
         valid=false;
         console.log("date is empty")
     }
-    
-    
+
     let task_time = input_arr[5].children[1].value;
     if(task_time===""){
         valid=false;
         console.log("time is empty")
     }
-
-    let due = new Date(input_arr[5].children[0].value +"T"+ input_arr[5].children[1].value) - new Date().getTime();
-    if (due <= 86400000){
-        task_row.style.backgroundColor = "#d4401b";
-    }
-
-    //validation
-    // let valid = false;
-    // console.log(task_name);
-    // console.log(task_name!=="");
-    if(task_name.textContent===""){valid=false;}
-    console.log(valid)
-    if(valid==true){
-        
-        task_row.append(task_id);
-        task_row.append(task_name);
-        task_row.append(task_description);
-        task_row.append(task_due);
-        table.append(task_row);
+    
+    if(task_name===""){valid=false;console.log("name is empty")}
+    if(valid===true){
+        add_task_row(
+            input_arr[1].value.trim(),
+            input_arr[3].value.trim(),
+            input_arr[5].children[0].value +" "+ input_arr[5].children[1].value
+        )        
     }
 
     button_div.style.display="flex";
@@ -70,6 +46,27 @@ function add_task(){
     }
     save_tasks();
 }
+
+function add_task_row(name,desc,due){
+    let task_row = document.createElement("tr");
+    let task_id = document.createElement("td");
+    let task_name = document.createElement("td");
+    let task_description = document.createElement("td");
+    let task_due = document.createElement("td"); 
+    task_id.textContent=table.children.length + 1;
+    task_name.textContent=name;
+    task_description.textContent=desc;
+    task_due.textContent=due;
+    if(new Date(due.slice(0,10)+"T"+due.slice(11,16))-new Date()<86400000){
+        task_row.style.backgroundColor = "#eb0000";
+    }
+    task_row.append(task_id);
+    task_row.append(task_name);
+    task_row.append(task_description);
+    task_row.append(task_due);
+    table.append(task_row);
+}
+
 function get_new_task(){
     // window.alert("get-task-called");
     let label1 = document.createElement("label");
@@ -137,24 +134,30 @@ function remove_row(event){
 function save_tasks(){
     let tasks = [];
     if(table.children.length==0){return;}
+    console.log("the tasks are ",table.children)
     for (let i=0;i<table.children.length;i++){
-        let task_obj = {"name":table.children[1].textContent,"description":table.children[2].textContent,"due":table.children[3].textContent}
-        tasks.append(task_obj)
+        let task_obj = {
+                    name:table.children[i].children[1].textContent,
+                    description:table.children[i].children[2].textContent,
+                    due:table.children[i].children[3].textContent
+                };
+        tasks.push(task_obj);
     }
-    // new Array(table.children).forEach((row) => {
-    //     let row_contents = row.children;
-    //     console.log(row_contents)
-    // });
-    window.localStorage.setItem('saved_items',{tasks});
+    console.log("Saving the tasks...")
+    console.log(tasks)
+    console.log(tasks.length)
+
+    window.localStorage.setItem('saved_items',JSON.stringify(tasks));
 }
 
 function load_from_save(){
-    // let tasks = window.localStorage.getItem('saved_tasks');
-    // if(tasks===null){return;}
-    // else{console.log('tasks is not null');}
-    // for(let i=0;i<tasks.length;i++){
-    //     table.append(tasks[i]);
-    // }
-    // console.log(tasks);
-    table.innerHTML = window.localStorage.getItem('saved_items');
+    let tasks = JSON.parse(window.localStorage.getItem("saved_items"));
+    // console.log(tasks)
+    for (let i=0;i<tasks.length;i++){
+        add_task_row(
+            tasks[i]["name"],
+            tasks[i]["description"],
+            tasks[i]["due"],
+        )
+    }
 }

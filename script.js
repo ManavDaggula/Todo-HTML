@@ -103,7 +103,7 @@ function get_new_task(){
 function remove_a_task(){
     let tasks = table.children;
     if(tasks.length!==0){
-        console.log("trying to remove a task");
+//         console.log("trying to remove a task");
         for(let i=0;i<tasks.length;i++){
             tasks[i].addEventListener("click",remove_row);
         }
@@ -133,19 +133,20 @@ function remove_row(event){
 
 function save_tasks(){
     let tasks = [];
-    if(table.children.length==0){return;}
-    console.log("the tasks are ",table.children)
-    for (let i=0;i<table.children.length;i++){
-        let task_obj = {
-                    name:table.children[i].children[1].textContent,
-                    description:table.children[i].children[2].textContent,
-                    due:table.children[i].children[3].textContent
-                };
-        tasks.push(task_obj);
+    if(table.children.length!=0){
+//         console.log("the tasks are ",table.children)
+        for (let i=0;i<table.children.length;i++){
+            let task_obj = {
+                        name:table.children[i].children[1].textContent,
+                        description:table.children[i].children[2].textContent,
+                        due:table.children[i].children[3].textContent
+                    };
+            tasks.push(task_obj);
+        }
     }
-    console.log("Saving the tasks...")
-    console.log(tasks)
-    console.log(tasks.length)
+//     console.log("Saving the tasks...")
+//     console.log(tasks)
+//     console.log(tasks.length)
 
     window.localStorage.setItem('saved_items',JSON.stringify(tasks));
 }

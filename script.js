@@ -152,6 +152,7 @@ function save_tasks(){
 }
 
 function load_from_save(){
+    if(window.localStorage.getItem("saved_items")==null){return}
     let tasks = JSON.parse(window.localStorage.getItem("saved_items"));
     // console.log(tasks)
     for (let i=0;i<tasks.length;i++){
